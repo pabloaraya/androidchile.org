@@ -1,11 +1,71 @@
 html { 
-  background: url(../img/bg.jpg) no-repeat center center fixed; 
+  background: url(../img/bg.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
+.center-container {
+	width: 800px;
+  height: 700px;
+
+  position:absolute; /*it can be fixed too*/
+  left:0; right:0;
+  top:0; bottom:0;
+  margin:auto;
+
+  /*this to solve "the content will not be cut when the window is smaller than the content": */
+  max-width:100%;
+  max-height:100%;
+  overflow:auto;
+
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.right-container {
+	height: 600px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+h1 {
+	color: white;
+}
+
+h4 {
+	color: white;
+}
+
+h5 {
+	width: 300px;
+	max-height: 100px;
+	float: right;
+	overflow: hidden;
+}
+
+.welcome {
+	width: 320px;
+	float: left;
+}
+
+.nexus6 {
+	width: 280px;
+}
+
 .card {
-	width: 200px;
+	width: 400px;
+	float: right;
+}
+
+.button-go {
+	float: right;
+}
+
+.profile {
+	width: 50px;
+	float: left;
+  padding-top: 10px;
 }

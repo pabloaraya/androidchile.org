@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Android Chile</title>
+        <meta charset="UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
         <link href="css/roboto.min.css" rel="stylesheet">
@@ -10,53 +11,77 @@
     </head>
     <body>
 
-        <!--div class="card center jumbotron" >
-            <h1>Jumbotron</h1>
-            <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <p><a class="btn btn-primary btn-lg">Learn more</a></p>
-        </div-->
+    <div class="center-container">
+      <div class="welcome">
+        <h1>Android Chile</h1>
+        <h4>Comunidad de desarrolladores Android</h4>
+        <img class="nexus6" src="img/nexus6.png" />
+      </div>
+      <div class="right-container">
+      <div class="card center jumbotron" >
+        <img class="profile" src="http://graph.facebook.com/10203103533402233/picture?type=square" />
+        <h5>Muchachos, una oferta de pega. Lamentablemente no tengo información del sueldo ni tampoco para que cliente es, pero lean y si a alguien le interesa me comentan por mensaje interno
+Android Developers Senior, para una empresa de USA, con disponibilidad para trabajar On-site al menos por un año en San Mateo, California.
+Required Skills / Experience:
+5+ years experience coding on Android
+Strong Java experience
+Knowledge of Android UI frameworks
+English Advanced Level
+saludos</h5>
+        <a href="https://www.facebook.com/groups/187694778228655/" class="btn btn-info btn-sm button-go">Ver tema</a>
+      </div>
+      <div class="card center jumbotron" >
+        <img class="profile" src="http://graph.facebook.com/1131609038/picture?type=square" />
+        <h5>Interesantes experimentos en Android y acceso a sus códigos fuentes</h5>
+        <a href="https://www.facebook.com/groups/187694778228655/" class="btn btn-info btn-sm button-go">Ver tema</a>
+      </div>
+      <div class="card center jumbotron" >
+        <img class="profile" src="http://graph.facebook.com/1131609038/picture?type=square" />
+        <h5>Hola hola! Estoy desarrollando un diccionario español/mapudungun para teléfonos Android, y ya cuento con una versión disponible en Google Play. Es un proyecto open source así que cualquiera puede mejorarlo. Saludos!</h5>
+        <a href="https://www.facebook.com/groups/187694778228655/" class="btn btn-info btn-sm button-go">Ver tema</a>
+      </div>
+      </div>
+    </div>
 
-        <!-- Your site ends -->
+        <!-- Your site ends --> 
 
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
         <script src="js/ripples.min.js"></script>
         <script src="js/material.min.js"></script>
+        <script>
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             //js.src = "http://connect.facebook.net/en_US/sdk/debug.js";
+             js.src = "http://connect.facebook.net/es_LA/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
         <script>
             $(document).ready(function() {
                 // This command is used to initialize some elements and make them work properly
                 $.material.init();
 
-                /* make the API call */
-                FB.api(
-                    "/187694778228655/feed",
+                window.fbAsyncInit = function() {
+                  FB.init({
+                    appId      : '843773952388352',
+                    xfbml      : true,
+                    version    : 'v2.5'
+                  });
+
+                  FB.api(
+                    "/187694778228655/feed?fields=from,message",
                     function (response) {
                       if (response && !response.error) {
-                        /* handle the result */
+                        for (i = 0; i < response.data.length; i++) {
+                          console.log(i);
+                        }
                       }
                     }
-                );
+                  );
+                };
             });
         </script>
-
     </body>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '843773952388352',
-          xfbml      : true,
-          version    : 'v2.5'
-        });
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "http://connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
-
 </html>
