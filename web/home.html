@@ -18,7 +18,7 @@
         <img class="nexus6" src="img/nexus6.png" />
       </div>
       <div class="right-container">
-      <div class="card center jumbotron" >
+      <div id="template" class="card center jumbotron" >
         <img class="profile" src="http://graph.facebook.com/10203103533402233/picture?type=square" />
         <h5>Muchachos, una oferta de pega. Lamentablemente no tengo información del sueldo ni tampoco para que cliente es, pero lean y si a alguien le interesa me comentan por mensaje interno
 Android Developers Senior, para una empresa de USA, con disponibilidad para trabajar On-site al menos por un año en San Mateo, California.
@@ -73,8 +73,11 @@ saludos</h5>
                   FB.api(
                     "/187694778228655/feed?fields=from,message",
                     function (response) {
+                      console.log(response.error);
                       if (response && !response.error) {
                         for (i = 0; i < response.data.length; i++) {
+                          var tmp = $('#template').clone();
+                          tmp.find('.profile').set('src', 'http://graph.facebook.com/10203103533402233/picture?type=square');
                           console.log(i);
                         }
                       }
