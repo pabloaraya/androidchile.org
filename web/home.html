@@ -42,49 +42,33 @@ saludos</h5>
       </div>
       </div>
     </div>
-
-        <!-- Your site ends --> 
-
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="js/ripples.min.js"></script>
         <script src="js/material.min.js"></script>
         <script>
-          (function(d, s, id){
-             var js, fjs = d.getElementsByTagName(s)[0];
-             if (d.getElementById(id)) {return;}
-             js = d.createElement(s); js.id = id;
-             //js.src = "http://connect.facebook.net/en_US/sdk/debug.js";
-             js.src = "http://connect.facebook.net/es_LA/sdk.js";
-             fjs.parentNode.insertBefore(js, fjs);
-           }(document, 'script', 'facebook-jssdk'));
-        </script>
-        <script>
-            $(document).ready(function() {
-                // This command is used to initialize some elements and make them work properly
-                $.material.init();
-
-                window.fbAsyncInit = function() {
-                  FB.init({
-                    appId      : '843773952388352',
-                    xfbml      : true,
-                    version    : 'v2.5'
-                  });
-
-                  FB.api(
-                    "/187694778228655/feed?fields=from,message",
-                    function (response) {
-                      console.log(response.error);
-                      if (response && !response.error) {
-                        for (i = 0; i < response.data.length; i++) {
-                          var tmp = $('#template').clone();
-                          tmp.find('.profile').set('src', 'http://graph.facebook.com/10203103533402233/picture?type=square');
-                          console.log(i);
+          $(document).ready(function() {
+            // This command is used to initialize some elements and make them work properly
+            $.material.init();
+            $.getScript('http://connect.facebook.net/es_LA/sdk.js', function(){
+              FB.init({
+                appId: '843773952388352',
+                version: 'v2.5'
+              });
+              FB.login(function(){
+                FB.api("/187694778228655/feed?fields=from,message&limit=3", function (response) {
+                        console.log(response.error);
+                        if (response && !response.error) {
+                          for (i = 0; i < response.data.length; i++) {
+                            var tmp = $('#template').clone();
+                            tmp.find('.profile').set('src', 'http://graph.facebook.com/10203103533402233/picture?type=square');
+                            console.log(i);
+                          }
                         }
                       }
-                    }
-                  );
-                };
+                );
+              });
             });
+          });
         </script>
     </body>
 </html>
