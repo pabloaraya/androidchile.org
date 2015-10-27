@@ -41,9 +41,13 @@ h4 {
 
 h5 {
 	width: 300px;
-	max-height: 100px;
+	max-height: 105px;
 	float: right;
 	overflow: hidden;
+}
+
+#template {
+	display: none;
 }
 
 .welcome {
