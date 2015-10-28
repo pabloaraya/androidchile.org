@@ -1,49 +1,101 @@
 <html>
-    <head>
-        <title>Android Chile</title>
-        <meta charset="UTF-8">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
-        <link href="css/roboto.min.css" rel="stylesheet">
-        <link href="css/material.min.css" rel="stylesheet">
-        <link href="css/ripples.min.css" rel="stylesheet">
-        <link href="css/androidchile.css" rel="stylesheet">
-    </head>
-    <body>
-
-    <div class="center-container">
+  <head>
+    <title>Android Chile</title>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/roboto.min.css" rel="stylesheet">
+    <link href="css/material.min.css" rel="stylesheet">
+    <link href="css/ripples.min.css" rel="stylesheet">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/androidchile.css" rel="stylesheet">
+  </head>
+  <body>
+    <!--div class="welcome">
+      <h1>Android Chile</h1>
+      <h4>Comunidad de desarrolladores Android</h4>
+    </div-->
+    <div class="facebook-container">
+      <div id="owl" class="left-container owl-carousel">
+        <!--div id="template" class="template">
+        <div class="card jumbotron" >
+          <a class="click-profile" href="">
+            <img class="profile" alt="" src="http://graph.facebook.com/10203103533402233/picture?type=square" />
+          </a>
+          <div class="profile-name">Nombre</div>
+          <h5></h5>
+          <img class="img-description" />
+          <a href="https://www.facebook.com/groups/187694778228655/" class="btn btn-info btn-sm button-go">Ver tema</a>
+        </div>
+        </div-->
+        <div id="template" class="template">
+        <div class="card jumbotron" >
+          <a class="click-profile" href="">
+            <img class="profile" alt="" src="http://graph.facebook.com/10203103533402233/picture?type=square" />
+          </a>
+          <blockquote>
+            <p style="font-size: 15px;"></p>
+            <cite><div class="profile-name"></div></cite>
+          </blockquote>
+          <a class="a-description"><img class="img-description" /></a>
+          <a href="https://www.facebook.com/groups/187694778228655/" class="btn btn-info btn-sm button-go">Ver tema</a>
+        </div>
+        </div>
+      </div>
+      <div class="nav-container">
+        <div class="button-left"><i class="mdi-navigation-chevron-left"></i></div>
+        <div class="button-right"><i class="mdi-navigation-chevron-right"></i></div>
+      </div>
+    </div>
+    <!--div class="center-container">
       <div class="welcome">
         <h1>Android Chile</h1>
         <h4>Comunidad de desarrolladores Android</h4>
         <img class="nexus6" src="img/nexus6.png" />
       </div>
       <div class="right-container">
-        <div id="template" class="card center jumbotron" >
-          <a class="click-profile" href=""><img class="profile" alt="" src="http://graph.facebook.com/10203103533402233/picture?type=square" /></a>
-          <h5></h5>
-          <a href="https://www.facebook.com/groups/187694778228655/" class="btn btn-info btn-sm button-go">Ver tema</a>
-        </div>
+        
       </div>
-    </div>
+    </div-->
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="js/ripples.min.js"></script>
         <script src="js/material.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
         <script>
           $(document).ready(function() {
-            // This command is used to initialize some elements and make them work properly
+
             $.material.init();
+
             $.getScript('http://connect.facebook.net/es_LA/sdk.js', function(){
               FB.init({appId: '843773952388352', version: 'v2.5'});
-              FB.api("/187694778228655/feed?fields=from,message&limit=3&access_token=843773952388352|ztT6WSdMlVCLG_BlaebaxHQO0DQ", 
+              FB.api("/187694778228655/feed?fields=from,message,picture,link&limit=20&access_token=843773952388352|ztT6WSdMlVCLG_BlaebaxHQO0DQ", 
                 function (response) {
                 if (response && !response.error) {
                           for (i = 0; i < response.data.length; i++) {
                             var tmp = $('#template').clone().attr('id', i).show();
                             $(tmp).find('.profile').attr('src', 'http://graph.facebook.com/'+response.data[i].from.id+'/picture?type=square');
+                            $(tmp).find('.profile-name').html(response.data[i].from.name);
                             $(tmp).find('.click-profile').attr('href', 'https://www.facebook.com/'+response.data[i].from.id);
-                            $(tmp).find('h5').html(response.data[i].message);
-                            $('#template').after(tmp);
+                            $(tmp).find('p').html(response.data[i].message);
+
+                            if(response.data[i].picture != null){
+                              $(tmp).find('.img-description').attr('src', response.data[i].picture);
+                            }
+                            if(response.data[i].link != null){
+                              $(tmp).find('.a-description').attr('href', response.data[i].link);
+                            }
+                            $('#template').before(tmp);
                           }
+
+                          var owl = $("#owl");
+            owl.owlCarousel({
+              items : 4
+            });
+            $(".button-left").click(function(){
+    owl.trigger('owl.prev');
+  })
+            $(".button-right").click(function(){
+    owl.trigger('owl.next');
+  })
                         }
                 }
               );
